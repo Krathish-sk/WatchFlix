@@ -39,10 +39,10 @@ export default function Signup() {
   // Google signup
   async function handleGoogleSignUp() {
     try {
-      await signInWithPopup(firebaseAuth, provider);
-      toast.success("New user created")
+      const data = await signInWithPopup(firebaseAuth, provider);
+      toast.success(`Hello ${data.user.displayName}`);
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
   }
 
@@ -182,7 +182,7 @@ const Container = styled.div`
       .google-div {
         .google-button {
           width: 100%;
-          background: rgba(69, 132, 232, 0.818);
+          background: rgba(101, 149, 227, 0.818);
           display: flex;
           justify-content: space-around;
           align-items: center;
