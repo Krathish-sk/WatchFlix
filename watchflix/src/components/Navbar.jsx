@@ -74,7 +74,7 @@ const Container = styled.div`
     position: sticky;
     top: 0;
     height: 6.5rem;
-    width: 100px;
+    width: 100%;
     justify-content: space-between;
     position: fixed;
     top: 0;
@@ -148,7 +148,7 @@ const Container = styled.div`
         border: 1px solid white;
         background: rgba(0, 0, 0, 0.6);
         input {
-          width: 100px;
+          width: 150px;
           opacity: 1;
           visibility: visible;
           padding: 0.3rem;
