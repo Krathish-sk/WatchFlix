@@ -10,7 +10,7 @@ export default function Header(page) {
   return (
     <StyleHeader className="flex a-center j-between">
       <div className="logo">
-        <img src={logo} alt="logo" />
+        <img src={logo} alt="logo" onClick={handleNavigate} />
       </div>
       <button onClick={handleNavigate}>
         {page.login ? "Log In" : "Sign Up"}
@@ -24,6 +24,7 @@ const StyleHeader = styled.header`
   .logo {
     img {
       height: 5rem;
+      cursor: pointer;
     }
   }
   button {
@@ -32,7 +33,7 @@ const StyleHeader = styled.header`
     border: none;
     cursor: pointer;
     color: white;
-    border-radius: 0.2rem;
+    border-radius: 0.4rem;
     font-weight: bolder;
     font-size: 1.05rem;
   }
