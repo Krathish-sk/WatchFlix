@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { FaPlay } from "react-icons/fa";
@@ -10,13 +10,15 @@ import BgImage from "../assets/home.jpg";
 import MovieLogo from "../assets/homeTitle.webp";
 import { firebaseAuth } from "../utils/firebase";
 // import Slider from "../components/Slider"
-// import {fetchMovies, getGenres} from "../store";
+import { fetchGenres, fetchMovies } from "../slice/ContentSlice";
 
 export default function Netflix() {
+  const { genresLoaded, genres, movies } = useSelector(
+    (state) => state.content
+  );
   const [isScrolled, setIsScrolled] = useState(false);
-
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (!currentUser) navigate("/login");
@@ -26,6 +28,16 @@ export default function Netflix() {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
+
+  useEffect(() => {
+    dispatch(fetchGenres());
+  }, []);
+
+  useEffect(() => {
+    if (genresLoaded) {
+      dispatch(fetchMovies({ type: "all" }));
+    }
+  }, [genresLoaded]);
 
   return (
     <Container>
@@ -56,50 +68,50 @@ export default function Netflix() {
 
 const Container = styled.div`
   background-color: black;
-  .hero{
+  .hero {
     position: relative;
-    .background-image{
+    .background-image {
       filter: brightness(60%);
     }
-    img{
+    img {
       height: 100vh;
       width: 100vw;
     }
-    .container{
+    .container {
       position: absolute;
       bottom: 5rem;
-      .logo{
-        img{
+      .logo {
+        img {
           width: 100%;
           height: 100%;
           margin-left: 5rem;
         }
       }
-    .buttons{
-      margin:5rem;
-      gap:2rem;
-      button{
-        font-size: 1.4rem;
-        gap:1rem;
-        border-radius: 0.2rem;
-        padding: .5rem;
-        padding-left: 2rem;
-        padding-right: 2.4rem;
-        border:none;
-        cursor: pointer;
-        transition: .2s ease-in-out
-        &:hover{
-          opacity: .8;
-        }
-        &:nth-of-type(2){
-          background-color: rgba(109, 109,110,.7);
-          color: white;
-          svg{
-            font-size: 1.8rem;
+      .buttons {
+        margin: 5rem;
+        gap: 2rem;
+        button {
+          font-size: 1.4rem;
+          gap: 1rem;
+          border-radius: 0.2rem;
+          padding: 0.5rem;
+          padding-left: 2rem;
+          padding-right: 2.4rem;
+          border: none;
+          cursor: pointer;
+          transition: 0.2s ease-in-out;
+          &:hover {
+            opacity: 0.8;
+          }
+          &:nth-of-type(2) {
+            background-color: rgba(109, 109, 110, 0.7);
+            color: white;
+            svg {
+              font-size: 1.8rem;
+            }
           }
         }
       }
-    }
     }
   }
 `;

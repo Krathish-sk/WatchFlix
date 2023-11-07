@@ -14,7 +14,6 @@ export default function Player() {
           title="Video"
           className="video"
           src="//www.youtube.com/embed/p4qx2HzPV_o?autoplay=0"
-          frameborder="0"
           allowFullScreen
         ></iframe>
       </div>
