@@ -5,7 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { AiOutlinePlus } from "react-icons/ai";
-import { IoPlayCircleSharp } from "react-icons/io";
+import { IoPlayCircleSharp } from "react-icons/io5";
 import { RiThumbUpFill, RiThumbDownFill } from "react-icons/ri";
 import { BiChevronDown } from "react-icons/bi";
 import { BsCheck } from "react-icons/bs";
